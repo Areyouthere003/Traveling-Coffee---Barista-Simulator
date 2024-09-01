@@ -3,7 +3,32 @@ guid: 0688c58091e1cb64d8009cee14ff2846
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Button
+    second: {fileID: 2100000, guid: 8bb175cf62e824f46b367d6a07a2d40d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Coffee_Bean2
+    second: {fileID: 2100000, guid: 48500f69624852140b7ab92bb360bca1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Cover.001
+    second: {fileID: 2100000, guid: 916f7434140bfeb48a097bd6dfef48e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Grind_Base
+    second: {fileID: 2100000, guid: 916f7434140bfeb48a097bd6dfef48e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Grind_Glass
+    second: {fileID: 2100000, guid: a6a1b465e66338043a0ff882c2822600, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -88,7 +113,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.002
+    globalScale: 0.2
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

@@ -3,7 +3,17 @@ guid: c86056bc50adcbc4087f8ab02a4c297b
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Timer_Gum
+    second: {fileID: 2100000, guid: 916f7434140bfeb48a097bd6dfef48e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Timer_Pull_Plas
+    second: {fileID: 2100000, guid: 916f7434140bfeb48a097bd6dfef48e4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -88,7 +98,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.001
+    globalScale: 0.1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
