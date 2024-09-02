@@ -18,17 +18,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_DW2
-    second: {fileID: 2100000, guid: 8c35ec7ec5a40de489d098acc0c54cf9, type: 2}
+    second: {fileID: 2100000, guid: 916f7434140bfeb48a097bd6dfef48e4, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_Tube
-    second: {fileID: 2100000, guid: a6a1b465e66338043a0ff882c2822600, type: 2}
+    second: {fileID: 2100000, guid: 3aff90ee22e914f47bfdb4bf8f639b63, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material_Gryph
-    second: {fileID: 2100000, guid: 8bb175cf62e824f46b367d6a07a2d40d, type: 2}
+    second: {fileID: 2100000, guid: 8c35ec7ec5a40de489d098acc0c54cf9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -113,7 +113,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.2
+    globalScale: 0.002
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
