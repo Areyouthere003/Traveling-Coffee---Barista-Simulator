@@ -5,13 +5,23 @@ using UnityEngine;
 
 public class FuntionalEvents : MonoBehaviour
 {
+    [Header("rendering Switch settings")]
+    [Tooltip("Change the emissor texture to 0 in the Electric Switch")]
     [SerializeField] MeshRenderer ButtonSwitch;
+    
+    //Material associated with the Electric Switch
     Material myMaterial;
-
-    public int validSwicth = 0;
+    int validSwicth = 0;
     Color colorBase = new Color(2, 34, 191);
 
-    // Start is called before the first frame update
+    [Header("Rendering Stove Settings")]
+    [Tooltip("Select the object from stove model")]
+    [SerializeField] Material stoveDL, stoveUL, stoveDR, stoveUR;
+
+    Color stoveMaterial = new Color(214, 23, 23, 172);
+    int stovePos = 0;
+    bool valid01 = false;
+
     void Start()
     {
     }
@@ -19,6 +29,25 @@ public class FuntionalEvents : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (valid01 && stovePos == 0)
+        {
+            if (stoveDL.color.a == 0)
+            {
+                stoveDL.SetColor("_Color", stoveMaterial * 0.15f * Time.deltaTime);
+
+                if (stoveDL.color.a == 172)
+                {
+                    valid01 = false;
+                }
+            }
+        }
+        else if(valid01 && stovePos == 1)
+        {
+                if(stoveDR.color.a == 0)
+                {
+                    stoveDR.SetColor("_Color", stoveMaterial * 0.15f * Time.deltaTime);
+                }
+        }
     }
 
     public void TurnEmissionButtonOnOff()
@@ -39,5 +68,19 @@ public class FuntionalEvents : MonoBehaviour
                 break;
         }
     }
+
+    public void PushButtonStove(int number)
+    {
+        if (!valid01)
+        {
+            //stovePrefab = gameObject;
+            valid01 = true;
+        }
+        else
+        {
+            valid01= false;
+        }
+    }
+
 
 }
