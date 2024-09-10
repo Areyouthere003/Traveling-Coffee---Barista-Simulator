@@ -80,8 +80,8 @@ public class MachineSequence : MonoBehaviour
         float distance = Vector3.Distance(playerPosition, objectPosition);
         float distanceThermo = Vector3.Distance(grindMachine.transform.position, thermoPosition);
 
-        Debug.Log("The thermo Position:" + thermoPosition);
-        Debug.Log("Distance the hermo "+ distanceThermo);
+        //Debug.Log("The thermo Position:" + thermoPosition);
+        //Debug.Log("Distance the hermo "+ distanceThermo);
         if(distanceThermo < 1.7 && !triggerThermo)
         {
             HideMenu(menus.Length - 1);
