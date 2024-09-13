@@ -16,11 +16,16 @@ public class GrindingMachine : MonoBehaviour
     [SerializeField] AudioSource startAudio; [SerializeField] AudioSource middleAudio; [SerializeField] AudioSource finishAudio;
 
     //bools associated to action movement
-    bool grindOn = false, fillMachine = false;
+    [SerializeField] bool grindOn = false, fillMachine = false;
 
     //bools associated to the sounds
     bool eventStart = false, eventMiddle= false, eventFinish = false, eventMain = false;
     int statePos = 3;
+
+    [Header("Recipient coffee")]
+    [SerializeField] GameObject recipientCoffee;
+    Vector3 desirePos = new Vector3(4.292993068695068f, 0.8756742477416992f, -1.034999966621399f);
+    bool valid = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +37,57 @@ public class GrindingMachine : MonoBehaviour
     void Update()
     {
         SoundGMC();
+
+        if (grindOn)
+        {
+
+            childList[1].GetComponent<Transform>().Rotate(new Vector3(0, velocityGrind * Time.deltaTime, 0));
+            coffeBeans.transform.localPosition = Vector3.MoveTowards(coffeBeans.transform.localPosition, childList[18].transform.localPosition, VelocityConsume * Time.deltaTime);
+            
+        
+            if (recipientCoffee.transform.position == desirePos)
+            {
+                
+                if (recipientCoffee.transform.localScale.y < 1)
+                {
+                    recipientCoffee.transform.localScale = new Vector3(recipientCoffee.transform.localScale.x, recipientCoffee.transform.localScale.y + 0.07f * Time.deltaTime, recipientCoffee.transform.localScale.z);
+                }
+
+            }
+
+            if (coffeBeans.transform.localPosition.y <= childList[18].transform.localPosition.y)
+            {
+                grindOn = false;
+                coffeBeans.transform.localPosition = new Vector3(0.003f, 0, 0);
+            }
+
+        }
+
+        if (fillMachine)
+        {
+
+            if (coffeBeans.transform.localPosition.y < -0.08f)
+            {
+                coffeBeans.transform.localPosition =
+                Vector3.MoveTowards(coffeBeans.transform.localPosition, childList[17].transform.localPosition, 0.3f * Time.deltaTime);
+
+                if (coffeBeans.transform.localPosition.y == -0.08f)
+                {
+                    fillMachine = false;
+                }
+            }
+            else if (coffeBeans.transform.localPosition.y >= -0.08f && coffeBeans.transform.localPosition.y < 0)
+            {
+                coffeBeans.transform.localPosition =
+                Vector3.MoveTowards(coffeBeans.transform.localPosition, new Vector3(0.003f, 0, 0), 0.3f * Time.deltaTime);
+
+                if (coffeBeans.transform.localPosition.y == 0)
+                {
+                    fillMachine = false;
+                }
+            }
+
+        }
     }
 
     private void SoundGMC()
@@ -122,4 +178,26 @@ public class GrindingMachine : MonoBehaviour
     {
         VelocityConsume = number;
     }
+
+    public bool GetGrinOn(bool thisValid)
+    {
+        thisValid = grindOn;
+
+        return thisValid;
+    }
 }
+
+//public class ParticleSystemOnOFF : PlaticleSystemOnOff
+//{
+
+//    //ParticleSystem 
+//    PlaticleSystemOnOff coffeParticle;
+
+//    private void Update()
+//    {
+//        coffeParticle.CoffeeParticlesOnOff(true);
+
+//    }
+
+
+//}
