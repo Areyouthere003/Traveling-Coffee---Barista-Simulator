@@ -5,9 +5,9 @@ public class TutorialUIManager : MonoBehaviour
 {
     [SerializeField] public GameObject welcomeMenu;
     [SerializeField] public GameObject tutorialStep1Menu;
-    [SerializeField] public GameObject tutorialStep2Menu;
+    [SerializeField] private GameObject tutorialStep2Menu;
     [SerializeField] public GameObject switchObject;
-    [SerializeField] public GameObject nextObject;
+    // [SerializeField] public GameObject nextObject;
     [SerializeField] public Camera camerita;
     //[SerializeField] public Transform user;
 
@@ -15,18 +15,17 @@ public class TutorialUIManager : MonoBehaviour
     private int currentMenuIndex = 0;
     private GameObject[] menus;
     private Material outlineSwitch;
-    private Material outlineNext;
+    // private Material outlineNext;
     void Start()
     {
         Renderer renderer = switchObject.GetComponent<Renderer>();
-        Renderer rendererNext = nextObject.GetComponent<Renderer>();
+        // Renderer rendererNext = nextObject.GetComponent<Renderer>();
 
-        if (renderer != null && rendererNext != null)
+        if (renderer != null )
         {
             outlineSwitch = renderer.material;
             outlineSwitch.SetFloat("_Outline", 0.0f);
-            outlineNext = rendererNext.material;
-            outlineNext.SetFloat("_Outline", 0.0f);
+            // outlineNext = rendererNext.material;
         }
       
         menus = new GameObject[] { welcomeMenu, tutorialStep1Menu, tutorialStep2Menu};
@@ -82,14 +81,12 @@ public class TutorialUIManager : MonoBehaviour
     IEnumerator DeactivateLastMenu()
     {
         yield return new WaitForSeconds(5f);
-
         HideMenu(2);
     }
     public void CloseMenu(int index)
     {
         if (index < menus.Length - 1)
         {
-            // Hide the current menu and show the next one using the callback
             HideMenu(index, () => {
                 ShowMenu(currentMenuIndex+1);
             });

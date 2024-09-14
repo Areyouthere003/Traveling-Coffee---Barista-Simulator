@@ -8,9 +8,9 @@ public class LightOnOff : MonoBehaviour
 {
     [SerializeField] List<Transform> lightRoomList;
     [SerializeField] Transform[] individualLight;
-    [SerializeField] public bool triggerTest = true;
-    [SerializeField] public GameObject switchObject;
-    [SerializeField] public GameObject nextMenus;
+    [SerializeField] private bool triggerTest = true;
+    [SerializeField] private GameObject switchObject;
+    [SerializeField] private GameObject nextMenus;
     private Material outlineMaterial;
 
     // Start is called before the first frame update
@@ -29,7 +29,6 @@ public class LightOnOff : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -68,6 +67,9 @@ public class LightOnOff : MonoBehaviour
             RenderSettings.fog = true;
         }
         outlineMaterial.SetFloat("_Outline", 0.0f);
-        if (!nextMenus.activeSelf) nextMenus.SetActive(true);
+        if (!nextMenus.activeSelf){
+            nextMenus.SetActive(true);
+            Debug.Log("Next Menus activated");
+        } 
     }
 }
