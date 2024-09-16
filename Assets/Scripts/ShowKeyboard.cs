@@ -11,12 +11,12 @@ public class ShowKeyboard : MonoBehaviour
     public float verticalOffset = -0.5f;
     public Transform positionSource;
 
-    [SerializeField] private GameObject buttonTable;
     [SerializeField] private TMP_Text textDisplayTable;
     [SerializeField] private TMP_InputField inputText;
-
-    public void displayKeyBoard()
+    private bool keyboardOpen;
+    public void DisplayKeyBoard()
     {
+        keyboardOpen = true;
         inputText.onValueChanged.AddListener(UpdateText);
         NonNativeKeyboard.Instance.PresentKeyboard();
 
@@ -37,10 +37,11 @@ public class ShowKeyboard : MonoBehaviour
 
     public void RemoveLeakEvent()
     {
-       inputText.onValueChanged.RemoveListener(UpdateText);
+        keyboardOpen = false;
+        inputText.onValueChanged.RemoveListener(UpdateText);
     }
     void UpdateText(string inputText)
     {
-        textDisplayTable.text = inputText;
+        if (keyboardOpen) textDisplayTable.text = inputText;
     }
 }

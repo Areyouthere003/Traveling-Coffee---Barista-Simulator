@@ -7,13 +7,14 @@ public class TutoSequence : MonoBehaviour
     [SerializeField] private GameObject[] menus;
     [SerializeField] private GameObject elevatorObj;
     [SerializeField] private GameObject elevatorCanvas;
+    [SerializeField] private GameObject ContextualCanvas03;
     // [SerializeField] private GameObject thermometerObj;
     [SerializeField] private GameObject grindMachine;
     [SerializeField] private GameObject dispenserObj;
     private int currentMenuIndex = 0;
 
     [SerializeField] private GameObject PlayerObj;
-    [SerializeField] private GameObject targetObject;
+    [SerializeField] private GameObject coffeeRecipentObj;
 
     //Position Contextual
     [SerializeField] private float distance = 0.5f;
@@ -33,6 +34,7 @@ public class TutoSequence : MonoBehaviour
         }
 
         ShowMenu(currentMenuIndex);
+        ShowMenu(2);
     }
 
     // public void ShowMachineHilighed()
@@ -98,21 +100,34 @@ public class TutoSequence : MonoBehaviour
         yield return new WaitForSeconds(6f);
         HideMenu(index);
     }
-
+    public void TriggerGrab(int index){
+        currentMenuIndex= index;
+        ShowMenu(currentMenuIndex);
+        // HideCustomAuto(currentMenuIndex);
+        // currentMenuIndex += 1;
+    }
     public void TriggerOlletaGrip(){
         if(!firstInteractionOlleta){
-            currentMenuIndex = 5;
+            currentMenuIndex = 6;
             ShowMenu(currentMenuIndex);
             HideCustomAuto(currentMenuIndex);
             currentMenuIndex += 1;
         }
     }
     public void TriggerRecipeGrindMchine(){
+        Debug.Log("OnNext called");
         if (!firstInteractionRecipeMachine)
         {    
             firstInteractionRecipeMachine = true;
-            OnNextButtonPressed();
+            LeanTween.scale(ContextualCanvas03, Vector3.one, 0.5f).setEase(LeanTweenType.easeOutExpo);
+            // StartCoroutine(DelayMenu());
         }
+    }
+    public void HideContextual03(){
+        LeanTween.scale(ContextualCanvas03, Vector3.zero, 0.5f).setEase(LeanTweenType.easeInExpo).setOnComplete(() =>
+        {
+            ContextualCanvas03.SetActive(false);
+        });
     }
     public void TriggerMachineBtnPressed(){
         if (!firstInteractionButtons)
@@ -124,16 +139,19 @@ public class TutoSequence : MonoBehaviour
 
     void Update()
     {
-        Vector3 playerPosition = PlayerObj.transform.position;
-        Vector3 staticObjectPosition = grindMachine.transform.position;
-        Vector3 objectPosition = targetObject.transform.position;
+        // Vector3 objectPosition = targetObject.transform.position;
+        Debug.Log("Current Index:  BRO");
 
-        float distanceRecipe = Vector3.Distance(staticObjectPosition, objectPosition);
-        float distancePlayerToGrind = Vector3.Distance(PlayerObj.transform.position,staticObjectPosition);
+        float distanceRecipe = Vector3.Distance(grindMachine.transform.position, coffeeRecipentObj.transform.position);
+        float distancePlayerToGrind = Vector3.Distance(PlayerObj.transform.position,grindMachine.transform.position);
         float distancePlayerToElavator = Vector3.Distance(PlayerObj.transform.position, elevatorObj.transform.position);
         float distanceOlletaToDispenser = Vector3.Distance(olletaPosition.position, dispenserObj.transform.position);
+
+        //This one does appear the Contextual of the CoffeeRecipent
+        // Debug.Log("Distance between player and the Elavator :" + distancePlayerToElavator);
         if(distancePlayerToGrind < 1.2 && !grindIntroducctionShowed)
         {
+            Debug.Log("ENTERED BRO");
             grindIntroducctionShowed = true;
             currentMenuIndex = 1;
             ShowMenu(currentMenuIndex);
@@ -143,23 +161,17 @@ public class TutoSequence : MonoBehaviour
             StartCoroutine(HideElevatorCanvas());
         }
 
-        // if(distanceOlletaToPlayer < .8 && !olletaDinstanceTrigger)
-        // {
-        //     currentMenuIndex = 4;
-        //     ShowMenu(currentMenuIndex);
-        //     HideCustomAuto(currentMenuIndex);
-        //     currentMenuIndex += 1;
-        // } 
-
-        // Debug.Log("This is the disntance :" + distanceOlletaToDispenser);
-        if(distanceOlletaToDispenser < .4 && !dispenserTrigger)
+        if(distanceOlletaToDispenser < .5 && !dispenserTrigger)
         {
-            currentMenuIndex = 6;
+            dispenserTrigger = true;
+            currentMenuIndex = 7;
             ShowMenu(currentMenuIndex);
+            StartCoroutine(DesactiveAutoMenu(currentMenuIndex));
+
         } 
         if (distanceRecipe < .8 && !triggerGrindMachine)
         {
-            currentMenuIndex = 2;
+            currentMenuIndex = 3;
             triggerGrindMachine = true;
             ShowMenu(currentMenuIndex);
             // Debug.Log("TRUEEEE");
