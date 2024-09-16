@@ -6,6 +6,13 @@ TagManager:
   tags:
   - Timer
   - NormalCoffe
+  - Jar
+  - Cup
+  - Stove
+  - Thermo
+  - GrindingRecipient
+  - Dispensser
+  - GrindingMachine
   layers:
   - Default
   - TransparentFX

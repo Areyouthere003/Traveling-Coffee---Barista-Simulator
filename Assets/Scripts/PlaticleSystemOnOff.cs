@@ -9,43 +9,67 @@ public class PlaticleSystemOnOff : MonoBehaviour
     
     [SerializeField] bool valid = false;
 
-    GrindingMachine grindingMachine;
-    bool valid2 = false;
+    [SerializeField] GameObject coffeeBeans;
+    Vector3 endPos = new Vector3(0f, -0.15f, 0f);
+    public bool valid2 = false;
+
+    [Header("Particle Link")]
+    [SerializeField] GameObject apiGO;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        var coffeOn = gameObject.GetComponent<ParticleSystem>().emission;
+        coffeOn.enabled = valid;
     }
 
     // Update is called once per frame
     void Update()
     {
-       // Debug.Log(valid2);
 
-        //valid2 = grindingMachine.GetGrinOn(valid2);
+        valid2 = apiGO.activeInHierarchy;
 
-        if(valid /*&& valid2*/)
+        if (coffeeBeans.transform.localPosition.y > endPos.y)
         {
-            var coffeOn = gameObject.GetComponent<ParticleSystem>().emission;
-            coffeOn.enabled = valid;
+            if (valid)
+            {
+                var coffeOn = gameObject.GetComponent<ParticleSystem>().emission;
+                coffeOn.enabled = true;
+            }
+            else
+            {
+                var coffeOn = gameObject.GetComponent<ParticleSystem>().emission;
+                coffeOn.enabled = false;
+            }
         }
         else
         {
             var coffeOn = gameObject.GetComponent<ParticleSystem>().emission;
-            coffeOn.enabled = valid;
+            coffeOn.enabled = false;
         }
 
-    }
-
-    public void CoffeeParticlesOnOff(bool thisValid)
-    {
-        valid = thisValid;
-        if(valid)
+        if (valid2)
+        {
+            valid = true;
+        }
+        else
         {
             valid = false;
         }
+    }
+
+    public void CoffeeParticlesOnOff()
+    {
+        if(!apiGO.activeInHierarchy)
+        {
+            //valid = false;
+            apiGO.SetActive(false);
+        }
         else
-            valid = true;
+        {
+            //valid = true;
+            apiGO.SetActive(true);
+        }
+            
     }
 }

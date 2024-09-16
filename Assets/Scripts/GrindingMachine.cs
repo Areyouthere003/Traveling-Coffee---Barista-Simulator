@@ -27,6 +27,9 @@ public class GrindingMachine : MonoBehaviour
     Vector3 desirePos = new Vector3(4.292993068695068f, 0.8756742477416992f, -1.034999966621399f);
     bool valid = false;
 
+    [Header("Particles Link")]
+    [SerializeField] GameObject apiGO;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,10 +43,10 @@ public class GrindingMachine : MonoBehaviour
 
         if (grindOn)
         {
+            apiGO.SetActive(true);
 
             childList[1].GetComponent<Transform>().Rotate(new Vector3(0, velocityGrind * Time.deltaTime, 0));
             coffeBeans.transform.localPosition = Vector3.MoveTowards(coffeBeans.transform.localPosition, childList[18].transform.localPosition, VelocityConsume * Time.deltaTime);
-            
         
             if (recipientCoffee.transform.position == desirePos)
             {
@@ -52,15 +55,25 @@ public class GrindingMachine : MonoBehaviour
                 {
                     recipientCoffee.transform.localScale = new Vector3(recipientCoffee.transform.localScale.x, recipientCoffee.transform.localScale.y + 0.07f * Time.deltaTime, recipientCoffee.transform.localScale.z);
                 }
-
             }
 
             if (coffeBeans.transform.localPosition.y <= childList[18].transform.localPosition.y)
             {
+                //apiGO.SetActive(false);
                 grindOn = false;
-                coffeBeans.transform.localPosition = new Vector3(0.003f, 0, 0);
-            }
+                //coffeBeans.transform.localPosition = new Vector3(0.003f, 0, 0);
 
+                if (!grindOn)
+                {
+                    middleAudio.Stop();
+                    finishAudio.Play();
+                    //apiGO.SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            apiGO.SetActive(false);
         }
 
         if (fillMachine)
@@ -158,9 +171,9 @@ public class GrindingMachine : MonoBehaviour
 
     }
 
-    public void FillMachine()
+    public void FillMachine(bool valida2)
     {
-        fillMachine = true;
+        fillMachine = valida2;
     }
 
     public void GrindOn(int number)
@@ -179,25 +192,4 @@ public class GrindingMachine : MonoBehaviour
         VelocityConsume = number;
     }
 
-    public bool GetGrinOn(bool thisValid)
-    {
-        thisValid = grindOn;
-
-        return thisValid;
-    }
 }
-
-//public class ParticleSystemOnOFF : PlaticleSystemOnOff
-//{
-
-//    //ParticleSystem 
-//    PlaticleSystemOnOff coffeParticle;
-
-//    private void Update()
-//    {
-//        coffeParticle.CoffeeParticlesOnOff(true);
-
-//    }
-
-
-//}
