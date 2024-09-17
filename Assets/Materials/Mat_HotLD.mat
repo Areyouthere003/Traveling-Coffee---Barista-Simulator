@@ -11,6 +11,7 @@ Material:
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords:
   - _ALPHABLEND_ON
+  - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -61,22 +62,22 @@ Material:
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
+    - _Cutoff: 0
+    - _DetailNormalMapScale: 0
     - _DstBlend: 10
-    - _GlossMapScale: 1
-    - _Glossiness: 0.81
+    - _GlossMapScale: 0
+    - _Glossiness: 0
     - _GlossyReflections: 1
-    - _Metallic: 0.551
+    - _Metallic: 0
     - _Mode: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
+    - _SmoothnessTextureChannel: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 5
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 214, g: 23, b: 23, a: 0}
+    - _Color: {r: 0.7490196, g: 0.08235294, b: 0.08235294, a: 0.50980395}
     - _EmissionColor: {r: 95.87451, g: 6.5254903, b: 4.5176473, a: 1}
   m_BuildTextureStacks: []

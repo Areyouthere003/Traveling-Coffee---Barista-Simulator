@@ -6,12 +6,12 @@ public class StoveFunction : MonoBehaviour
 {
     [Header("Rendering Stove Settings")]
     [Tooltip("Select the object from stove model")]
-    [SerializeField] Material stoveLD; [SerializeField] Material stoveLU; [SerializeField] Material stoveRD; [SerializeField] Material stoveRU;
+    [SerializeField] GameObject stoveLD; [SerializeField] GameObject stoveLU; [SerializeField] GameObject stoveRD; [SerializeField] GameObject stoveRU; //Previously a Material
 
     [Header("API Objects Linked")]
     [SerializeField] GameObject[] gameObjectList;
 
-    float variabableAplha = 0.0000005f, maxAlpha = 0.000005f;
+    [SerializeField] float variabableAplha = 0.0000005f, maxAlpha = 0.000005f;
     Color stoveMaterialOn = new Color(214, 23, 23, 172); Color stoveMaterialOff = new Color(214, 23, 23, 0);
     [SerializeField] int stovePos = 0;
     [SerializeField] bool valid01 = false, valid02 = false, button1 = false, button2 = false, button3 = false, button4 = false, contactJar = false;
@@ -19,7 +19,7 @@ public class StoveFunction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AllMatsInZero();
+        //AllMatsInZero();
     }
 
     // Update is called once per frame
@@ -43,51 +43,73 @@ public class StoveFunction : MonoBehaviour
     {
         if (valid01 && stovePos == 0)
         {
-            if (stoveLD.color.a < 0.67f)
-            {
-                stoveLD.SetColor("_Color", new Color(214, 23, 23, stoveLD.color.a + variabableAplha * Time.deltaTime));
+            //if (stoveLD.color.a < 0.67f)
+                        //{
+                //stoveLD.SetColor("_Color", new Color(214, 23, 23, stoveLD.color.a + variabableAplha * Time.deltaTime));
 
-                if (stoveLD.color.a > maxAlpha)
-                {
-                    valid01 = false;
-                }
+                //if (stoveLD.color.a > maxAlpha)
+            //    {
+            //        //valid01 = false;
+            //    }
+            //}
+
+            if(!stoveLD.gameObject.activeInHierarchy)
+            {
+                    stoveLD.gameObject.SetActive(true);
             }
+
         }
         else if (valid01 && stovePos == 1)
         {
-            if (stoveLU.color.a < 0.67f)
-            {
-                stoveLU.SetColor("_Color", new Color(214, 23, 23, stoveLU.color.a + variabableAplha * Time.deltaTime));
+            //if (stoveLU.color.a < 0.67f)
+            //{
+            //    stoveLU.SetColor("_Color", new Color(214, 23, 23, stoveLU.color.a + variabableAplha * Time.deltaTime));
 
-                if (stoveLU.color.a > maxAlpha)
-                {
-                    valid01 = false;
-                }
+            //    if (stoveLU.color.a > maxAlpha)
+            //    {
+            //        valid01 = false;
+            //    }
+            //}
+
+           if(!stoveLU.gameObject.activeInHierarchy)
+            {
+                stoveLU.gameObject.SetActive(true);
             }
+
         }
         else if (valid01 && stovePos == 2)
         {
-            if (stoveRD.color.a < 0.67f)
-            {
-                stoveRD.SetColor("_Color", new Color(214, 23, 23, stoveRD.color.a + variabableAplha * Time.deltaTime));
+                //if (stoveRD.color.a < 0.67f)
+                //{
+                //    stoveRD.SetColor("_Color", new Color(214, 23, 23, stoveRD.color.a + variabableAplha * Time.deltaTime));
 
-                if (stoveRD.color.a > maxAlpha)
+                //    if (stoveRD.color.a > maxAlpha)
+                //    {
+                //        valid01 = false;
+                //    }
+                //}
+
+                if (!stoveRD.gameObject.activeInHierarchy)
                 {
-                    valid01 = false;
+                    stoveRD.gameObject.SetActive(true);
                 }
-            }
         }
         else if (valid01 && stovePos == 3)
         {
-            if (stoveRU.color.a < 0.67)
-            {
-                stoveRU.SetColor("_Color", new Color(214, 23, 23, stoveRU.color.a + variabableAplha * Time.deltaTime));
+                //if (stoveRU.color.a < 0.67)
+                //{
+                //    stoveRU.SetColor("_Color", new Color(214, 23, 23, stoveRU.color.a + variabableAplha * Time.deltaTime));
 
-                if (stoveRU.color.a > maxAlpha)
+                //    if (stoveRU.color.a > maxAlpha)
+                //    {
+                //        valid01 = false;
+                //    }
+                //}
+
+                if (!stoveRU.gameObject.activeInHierarchy)
                 {
-                    valid01 = false;
+                    stoveRU.gameObject.SetActive(true);
                 }
-            }
         }
     }
 
@@ -97,56 +119,74 @@ public class StoveFunction : MonoBehaviour
         {
             if (valid02 && stovePos == 0)
             {
-                if (stoveLD.color.a > 0)
-                {
-                    stoveLD.SetColor("_Color", new Color(214, 23, 23, stoveLD.color.a - variabableAplha * Time.deltaTime));
+                    //if (stoveLD.color.a > 0)
+                    //{
+                    //    stoveLD.SetColor("_Color", new Color(214, 23, 23, stoveLD.color.a - variabableAplha * Time.deltaTime));
 
-                    if (stoveLD.color.a < 0)
+                    //    if (stoveLD.color.a < 0)
+                    //    {
+                    //        valid02 = false;
+                    //        stoveLD.SetColor("_Color", stoveMaterialOff);
+                    //    }
+                    //}
+                    if (stoveLD.gameObject.activeInHierarchy)
                     {
-                        valid02 = false;
-                        stoveLD.SetColor("_Color", stoveMaterialOff);
+                        stoveLD.gameObject.SetActive(false);
                     }
                 }
-            }
             else if (valid02 && stovePos == 1)
             {
-                if (stoveLU.color.a > 0)
-                {
-                    stoveLU.SetColor("_Color", new Color(214, 23, 23, stoveLU.color.a - variabableAplha * Time.deltaTime));
+                    //if (stoveLU.color.a > 0)
+                    //{
+                    //    stoveLU.SetColor("_Color", new Color(214, 23, 23, stoveLU.color.a - variabableAplha * Time.deltaTime));
 
-                    if (stoveLU.color.a < 0)
+                    //    if (stoveLU.color.a < 0)
+                    //    {
+                    //        valid02 = false;
+                    //        stoveLU.SetColor("_Color", stoveMaterialOff);
+                    //    }
+                    //}
+                    if (stoveLU.gameObject.activeInHierarchy)
                     {
-                        valid02 = false;
-                        stoveLU.SetColor("_Color", stoveMaterialOff);
+                        stoveLU.gameObject.SetActive(false);
                     }
                 }
-            }
             else if (valid02 && stovePos == 2)
             {
-                if (stoveRD.color.a > 0)
-                {
-                    stoveRD.SetColor("_Color", new Color(214, 23, 23, stoveRD.color.a - variabableAplha * Time.deltaTime));
+                    //if (stoveRD.color.a > 0)
+                    //{
+                    //    stoveRD.SetColor("_Color", new Color(214, 23, 23, stoveRD.color.a - variabableAplha * Time.deltaTime));
 
-                    if (stoveRD.color.a < 0)
+                    //    if (stoveRD.color.a < 0)
+                    //    {
+                    //        valid02 = false;
+                    //        stoveRD.SetColor("_Color", stoveMaterialOff);
+                    //    }
+                    //}
+
+                    if (stoveRD.gameObject.activeInHierarchy)
                     {
-                        valid02 = false;
-                        stoveRD.SetColor("_Color", stoveMaterialOff);
+                        stoveRD.gameObject.SetActive(false);
                     }
                 }
-            }
             else if (valid02 && stovePos == 3)
             {
-                if (stoveRU.color.a > 0)
-                {
-                    stoveRU.SetColor("_Color", new Color(214, 23, 23, stoveRU.color.a - variabableAplha * Time.deltaTime));
+                    //if (stoveRU.color.a > 0)
+                    //{
+                    //    stoveRU.SetColor("_Color", new Color(214, 23, 23, stoveRU.color.a - variabableAplha * Time.deltaTime));
 
-                    if (stoveRU.color.a < 0)
+                    //    if (stoveRU.color.a < 0)
+                    //    {
+                    //        valid02 = false;
+                    //        stoveRU.SetColor("_Color", stoveMaterialOff);
+                    //    }
+                    //}
+
+                    if (stoveRU.gameObject.activeInHierarchy)
                     {
-                        valid02 = false;
-                        stoveRU.SetColor("_Color", stoveMaterialOff);
+                        stoveRU.gameObject.SetActive(false);
                     }
                 }
-            }
         }
     }
 
@@ -217,10 +257,10 @@ public class StoveFunction : MonoBehaviour
 
     private void AllMatsInZero()
     {
-        stoveLD.SetColor("_Color", stoveMaterialOff);
-        stoveLU.SetColor("_Color", stoveMaterialOff);
-        stoveRD.SetColor("_Color", stoveMaterialOff);
-        stoveRU.SetColor("_Color", stoveMaterialOff);
+        //stoveLD.SetColor("_Color", stoveMaterialOff);
+        //stoveLU.SetColor("_Color", stoveMaterialOff);
+        //stoveRD.SetColor("_Color", stoveMaterialOff);
+        //stoveRU.SetColor("_Color", stoveMaterialOff);
     }
 
     private void DetectingGO()
